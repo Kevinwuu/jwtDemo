@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
   token = auth.replace('Bearer ', '')
   try {
       const decoded = jwt.verify(token, SECRET)
+      console.log('decoded', decoded)
       if (decoded.user == "user") {
           res.render('index', {
               username: decoded.user
@@ -52,6 +53,12 @@ router.get('/content', function (req, res) {
     } catch {
         res.status(401).send({ error: 'Please authenticate.' })
     }
+})
+
+router.get('/test', function (req, res){
+    res.json({
+        message:'test work !'
+    })
 })
 
 module.exports = router;
