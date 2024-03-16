@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script>
+        async function login(username, password) {
+            try {
+                let res = await axios.post('http://127.0.0.1:8080/login', {
+                    username: username,
+                    password: password,
+                })
+                res = await axios.get('http://127.0.0.1:8080/content', {
+                    headers: {
+                        'Authorization': `Bearer ${res.data.token}`
+                    },
+                })
+                let element = document.querySelector('body');
+                element.innerHTML = `<h1 class="welcome">${res.data.data}</h1>`
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    </script>
+</head>
+
+<body class="text-center">
+    <form method="post" action="/login" class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="username" class="sr-only">Username</label>
+        <input name="username" type="username" class="form-control" id="username" placeholder="Username">
+        <label for="password" class="sr-only">Password</label>
+        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+        <div style="height:10px"></div>
+        <button type="button" class="btn btn-lg btn-primary btn-block"
+            onclick="login(this.form.username.value, this.form.password.value)">Login</button>
+    </form>
+</body>
+
+</html>
