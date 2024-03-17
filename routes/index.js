@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
+let cors = require('cors');
+
+let corsOptions = {
+  origin: ["http://localhost:8080", "https://chien-jwt-demo.vercel.app/"],
+};
+
+app.use(cors(corsOptions));
+
 const SECRET = 'secret'
 
 /* GET home page. */
