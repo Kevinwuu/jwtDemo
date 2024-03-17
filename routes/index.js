@@ -14,7 +14,6 @@ router.get('/', function(req, res, next) {
   token = auth.replace('Bearer ', '')
   try {
       const decoded = jwt.verify(token, SECRET)
-      console.log('decoded', decoded)
       if (decoded.user == "user") {
           res.render('index', {
               username: decoded.user
