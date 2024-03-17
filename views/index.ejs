@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script>
+        const apiUrl = process.env.APP_API_URL || 'http://localhost:8080';
         async function login(username, password) {
             try {
-                let res = await axios.post(`${window.location.href}/login`, {
+                let res = await axios.post(`${apiUrl}/login`, {
                     username: username,
                     password: password,
                 })
-                res = await axios.get(`${window.location.href}/content`, {
+                res = await axios.get(`${apiUrl}/content`, {
                     headers: {
                         'Authorization': `Bearer ${res.data.token}`
                     },
