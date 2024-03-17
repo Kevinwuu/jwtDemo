@@ -9,11 +9,11 @@
     <script>
         async function login(username, password) {
             try {
-                let res = await axios.post(`${window.location.hostname}:8080/login`, {
+                let res = await axios.post(`${window.location.href}/login`, {
                     username: username,
                     password: password,
                 })
-                res = await axios.get(`${window.location.hostname}:8080/content`, {
+                res = await axios.get(`${window.location.href}/content`, {
                     headers: {
                         'Authorization': `Bearer ${res.data.token}`
                     },
